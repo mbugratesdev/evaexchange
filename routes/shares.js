@@ -41,21 +41,6 @@ router.post('/', (req, res) => {
         .catch((err) => res.status(400).json({ success: false, error: 'Error adding share' }))
 })
 
-router.put('/update', (req, res) => {
-    const { symbol, price } = req.body
-
-    const { error, value } = schema.validate({ symbol, price })
-    if (error) return res.status(400).json({ success: false, error: error.message })
-
-    // Create user
-    Share.create({
-        symbol,
-        price,
-    })
-        .then((share) => res.status(201).json({ success: true, data: share }))
-        .catch((err) => res.status(400).json({ success: false, error: 'Error adding share' }))
-})
-
 router.put('/:id', async (req, res) => {
     const { price } = req.body
 
